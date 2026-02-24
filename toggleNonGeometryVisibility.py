@@ -5,23 +5,26 @@ moduleIconUrl = 'https://github.com/PrewizardsStudio/toggle-non-geometry-visibil
 moduleCommand = """
 def setNonGeometryVisibility(visibility='True|False|toggle', targetModelPanel = 'active'):
     if targetModelPanel == 'active':    
-        cmds.getPanel( withFocus=True )
-    if visibility == 'toggle':
-        visibility = not cmds.modelEditor (targetModelPanel, query = True, locators = True)
-    cmds.modelEditor (targetModelPanel, edit = True, locators = visibility)
-    cmds.modelEditor (targetModelPanel, edit = True, pivots = visibility)
-    cmds.modelEditor (targetModelPanel, edit = True, joints = visibility)
-    cmds.modelEditor (targetModelPanel, edit = True, cameras = visibility)
-    cmds.modelEditor (targetModelPanel, edit = True, ikHandles = visibility)
-    cmds.modelEditor (targetModelPanel, edit = True, lights = visibility)
-    cmds.modelEditor (targetModelPanel, edit = True, nurbsCurves = visibility)
-    cmds.modelEditor (targetModelPanel, edit = True, manipulators = visibility)
-    cmds.modelEditor (targetModelPanel, edit = True, grid = visibility)
-    #cmds.modelEditor (targetModelPanel, edit = True, hud = visibility)
-    cmds.modelEditor (targetModelPanel, edit = True, sel = visibility)
-    cmds.modelEditor (targetModelPanel, edit = True, handles = visibility)
-    cmds.modelEditor (targetModelPanel, edit = True, dimensions = visibility)
-    cmds.modelEditor (targetModelPanel, edit = True, motionTrails = visibility)
+        targetModelPanel = cmds.getPanel( withFocus=True )
+    if cmds.getPanel(typeOf = targetModelPanel) == 'modelPanel':    
+        if visibility == 'toggle':
+            visibility = not cmds.modelEditor (targetModelPanel, query = True, locators = True)
+        cmds.modelEditor (targetModelPanel, edit = True, locators = visibility)
+        cmds.modelEditor (targetModelPanel, edit = True, pivots = visibility)
+        cmds.modelEditor (targetModelPanel, edit = True, joints = visibility)
+        cmds.modelEditor (targetModelPanel, edit = True, cameras = visibility)
+        cmds.modelEditor (targetModelPanel, edit = True, ikHandles = visibility)
+        cmds.modelEditor (targetModelPanel, edit = True, lights = visibility)
+        cmds.modelEditor (targetModelPanel, edit = True, nurbsCurves = visibility)
+        cmds.modelEditor (targetModelPanel, edit = True, manipulators = visibility)
+        cmds.modelEditor (targetModelPanel, edit = True, grid = visibility)
+        #cmds.modelEditor (targetModelPanel, edit = True, hud = visibility)
+        cmds.modelEditor (targetModelPanel, edit = True, sel = visibility)
+        cmds.modelEditor (targetModelPanel, edit = True, handles = visibility)
+        cmds.modelEditor (targetModelPanel, edit = True, dimensions = visibility)
+        cmds.modelEditor (targetModelPanel, edit = True, motionTrails = visibility)
+    else:
+        cmds.error('Activate a model panel')
 setNonGeometryVisibility(visibility='toggle', targetModelPanel = 'active')
 """
 
